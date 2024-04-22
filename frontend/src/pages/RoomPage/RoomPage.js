@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 // import Canvas from "./Canvas";
 import rough from "roughjs"
 import Whiteboard from "../../components/Whiteboard/Whiteboard";
+import Chat from "../../components/ChatBar/ChatBar"
 const roughGenerator = rough.generator();
 const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
   const canvasRef = useRef(null);
@@ -12,6 +13,7 @@ const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
   const [history, setHistory] = useState([]);
   const [tool, setTool] = useState("pencil");
   const [openedUserTab, setOpenedUserTab] = useState(false);
+  const [openedChatTab, setOpenedChatTab] = useState(false);
 
   // useEffect(() => {
   //   return ()=>{
@@ -61,6 +63,7 @@ const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
     <div className="container-fluid">
       <div className="row">
         <button onClick={()=>setOpenedUserTab(true)} type="button" className="btn btn-dark" style={{display:"block",position:"absolute",top:"5%",left:"5%",height:"40px",width:"100px"}}>Users</button>
+        <button onClick={()=>setOpenedChatTab(true)} type="button" className="btn btn-primary" style={{display:"block",position:"absolute",top:"5%",left:"15%",height:"40px",width:"100px"}}>Chats</button>
         {openedUserTab && (
           <div className="position-fixed top-0 h-100 text-white bg-dark" style={{width:"250px",left:"0%"}}>
             <button type="button" className="btn btn-light" onClick={()=>{setOpenedUserTab(false)}}  style={{display:"block",position:"absolute",top:"5%",left:"25%",height:"40px",width:"100px"}}>Close</button>
@@ -72,6 +75,9 @@ const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
               ))}
             </div>
           </div>
+        )}
+        {openedChatTab && (
+          <Chat setOpenedChatTab={setOpenedChatTab} socket={socket}/>
         )}
         <h1 className="display-5 pt-4 pb-3 text-center">
           React Drawing App - users online:{users?.length}

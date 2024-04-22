@@ -33,7 +33,15 @@ io.on("connection", (socket) => {
       imgURLGlobal = data;
       socket.broadcast.to(roomIdGlobal).emit("whiteboardDataResponse",{imgURL: data});
     });
-    console.log("soceketid",socket.id)
+    socket.on("message", (data) => {
+      const {message} = data;
+      const user = getUser(socket.id)
+      console.log("user1",user,message)
+      if(user){
+        // removeUser(socket.id)
+        socket.broadcast.to(roomIdGlobal).emit("messageResponse",{message, name:user.name});
+      }
+    });
     socket.on("disconnect", () => {
       console.log("userleft runninng 1",socket.id)
       const user = getUser(socket.id)
