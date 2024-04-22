@@ -18,6 +18,7 @@ function App() {
     const [roomJoined, setRoomJoined] = useState(false);
     const [user, setUser] = useState({});
     const [users, setUsers] = useState([]);
+    const [chat, setChat] = useState([]);
 
     
   const uuid = () => {
@@ -67,7 +68,7 @@ function App() {
       <ToastContainer/>
       <Routes>
         <Route path="/" element={<Forms uuid={uuid} socket={socket} setUser={setUser}/>}></Route>
-        <Route path="/:roomid" element={<RoomPage user={user} users={users} socket={socket}/>}></Route>
+        <Route path="/:roomid" element={<RoomPage user={user} users={users} socket={socket} chat={chat} setChat={setChat}/>}></Route>
       </Routes>
     </div>
   );

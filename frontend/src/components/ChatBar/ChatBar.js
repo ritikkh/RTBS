@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-const ChatBar = ({setOpenedChatTab, socket}) => {
-  const [chat, setChat] = useState([]);
+const ChatBar = ({setOpenedChatTab, socket, chat,setChat}) => {
+  // const [chat, setChat] = useState([]);
+  console.log("chat data-----",chat)
   const [message, setMessage] = useState("");
   useEffect(()=>{
     socket.on("messageResponse",(data)=>{

@@ -5,7 +5,7 @@ import rough from "roughjs"
 import Whiteboard from "../../components/Whiteboard/Whiteboard";
 import Chat from "../../components/ChatBar/ChatBar"
 const roughGenerator = rough.generator();
-const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
+const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users, chat,setChat}) => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const [color, setColor] = useState("#000000");
@@ -77,7 +77,7 @@ const RoomPage = ({ userNo, socket, setUsers, setUserNo, user, users}) => {
           </div>
         )}
         {openedChatTab && (
-          <Chat setOpenedChatTab={setOpenedChatTab} socket={socket}/>
+          <Chat setOpenedChatTab={setOpenedChatTab} socket={socket}  chat={chat} setChat={setChat}/>
         )}
         <h1 className="display-5 pt-4 pb-3 text-center">
           React Drawing App - users online:{users?.length}
